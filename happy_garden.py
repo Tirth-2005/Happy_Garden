@@ -69,19 +69,6 @@ def mutate():
         fangflower_list.append(flower_rect)
         fangflower_vx_list.append(randint(2, 3))
         fangflower_vy_list.append(randint(2, 3))
-
-def check_flower_collision():
-    for index, flower in enumerate(flower_list):
-        if cow.colliderect(flower) and wilted_list[index] != "happy":
-            wilted_list[index] = "happy"
-
-def mutate():
-    if not game_over and flower_list:
-        rand_flower = randint(0, len(flower_list) - 1)
-        flower_rect = flower_list.pop(rand_flower)
-        fangflower_list.append(flower_rect)
-        fangflower_vx_list.append(randint(2, 3))
-        fangflower_vy_list.append(randint(2, 3))
  
 def update_fangflowers():
     for i, fangflower in enumerate(fangflower_list):
@@ -136,12 +123,6 @@ def game_loop():
 
         screen.blit(garden_img, (0, 0))
         screen.blit(cow_img, cow.topleft)  
-
-        update_fangflowers()
-        time_elapsed = int(time.time() - start_time)
-
-        screen.blit(garden_img, (0, 0))
-        screen.blit(cow_img, cow.topleft)
 
         for flower in flower_list:
             screen.blit(flower_img if wilted_list[flower_list.index(flower)] == "happy" else wilted_flower_img, flower.topleft)
