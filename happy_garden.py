@@ -82,28 +82,7 @@ def mutate():
         fangflower_list.append(flower_rect)
         fangflower_vx_list.append(randint(2, 3))
         fangflower_vy_list.append(randint(2, 3))
-
-def update_fangflowers():
-    for i, fangflower in enumerate(fangflower_list):
-        fangflower.move_ip(fangflower_vx_list[i], fangflower_vy_list[i])
-
-        if fangflower.left < 0 or fangflower.right > WIDTH:
-            fangflower_vx_list[i] = -fangflower_vx_list[i]
-        if fangflower.top < 150 or fangflower.bottom > HEIGHT:
-            fangflower_vy_list[i] = -fangflower_vy_list[i]  
-
-def game_loop():
-    global time_elapsed, game_over
-    clock =pygame.time.Clock()
-
-    flower_timer = pygame.USEREVENT + 1
-    wilt_timer = pygame.USEREVENT + 2
-    mutate_timer = pygame.USEREVENT + 3
-
-    pygame.time.set_timer(flower_timer, 4000)
-    pygame.time.set_timer(wilt_timer, 3000)
-    pygame.time.set_timer(mutate_timer, 20000)
-
+ 
 def update_fangflowers():
     for i, fangflower in enumerate(fangflower_list):
         fangflower.move_ip(fangflower_vx_list[i], fangflower_vy_list[i])
