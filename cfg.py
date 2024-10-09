@@ -1,16 +1,16 @@
 import os
 
-FPS = 100
+FPS = 60
 SCREENSIZE = (800, 600)
 
 IMAGE_PATH = {
     'cow':os.path.join(os.getcwd(), 'Happy Garden/resources/images/cow.png'),
     'cow_water':os.path.join(os.getcwd(), 'Happy Garden/resources/images/cow-water.png'),
-    'fang_pink':os.path.join(os.getcwd(), 'Happy Garden/resources/images/fangpink.png'),
+    'fangflower':os.path.join(os.getcwd(), 'Happy Garden/resources/images/fangpink.png'),
     'fang_red':os.path.join(os.getcwd(), 'Happy Garden/resources/images/fangred.png'),
     'fang_blue':os.path.join(os.getcwd(), 'Happy Garden/resources/images/fangblue.png'),
     'fang':os.path.join(os.getcwd(), 'Happy Garden/resources/images/redbuse.png'),
-    'flower_wilt':os.path.join(os.getcwd(), 'Happy Garden/resources/images/flower-wilt.png'),
+    'wilted_flower':os.path.join(os.getcwd(), 'Happy Garden/resources/images/flower-wilt.png'),
     'flower':os.path.join(os.getcwd(), 'Happy Garden/resources/images/flower.png'),
     'garden':os.path.join(os.getcwd(), 'Happy Garden/resources/images/garden.png'),
     'garden_rain':os.path.join(os.getcwd(), 'Happy Garden/resources/images/garden-raining.png'),
