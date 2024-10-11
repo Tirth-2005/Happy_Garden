@@ -74,6 +74,9 @@ def game_loop():
             if wilted_list[rand_flower] == "happy":
                 wilted_list[rand_flower] = time.time()
 
+    # def reset_acter():
+
+
     def check_flower_wilted_time():
         nonlocal game_over
         current_time = time.time()
