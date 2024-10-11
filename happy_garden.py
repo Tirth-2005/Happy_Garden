@@ -13,6 +13,35 @@ def initGame():
     
     return screen, game_images
 
+def StartInterface(screen, game_images):
+    screen.fill((255, 255, 255))
+    pygame.draw.rect(screen, (255, 105, 180), (0, 0, cfg.SCREENSIZE[0]//2, cfg.SCREENSIZE[1]))
+    pygame.draw.rect(screen, (0, 0, 255), (cfg.SCREENSIZE[0]//2, 0, cfg.SCREENSIZE[0]//2, cfg.SCREENSIZE[1]))
+
+    actor_1 = game_images['cow']
+    actor_2 = game_images['pig']
+    screen.blit(actor_1, (100, 200))
+    screen.blit(actor_2, (400, 200))
+    font = pygame.font.Font(None, 50)
+    select = font.render("Select a character:", True, (0, 255, 0))
+    srect = select.get_rect()
+    srect.midtop = (cfg.SCREENSIZE[0] // 2, 40)
+    screen.blit(select, srect)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                if 100 <= mouse_pos[0] <= 300 and 100 <= mouse_pos[1] <= 300:
+                    return 1
+                elif 400 <= mouse_pos[0] <= 600 and 100 <= mouse_pos[1] <= 300:
+                    return 2
+        
+        pygame.display.update()
+
 def game_loop():
     screen, game_images = initGame()
     clock = pygame.time.Clock()
