@@ -46,6 +46,8 @@ def game_loop():
     screen, game_images = initGame()
     clock = pygame.time.Clock()
 
+    acter, game_over = StartInterface(screen, game_images), False
+
     cow_img = game_images['cow']
     cow = cow_img.get_rect(topleft=(100, 500))
     
@@ -55,7 +57,6 @@ def game_loop():
     fangflower_vy_list = []
     fangflower_vx_list = []
 
-    game_over = False
     start_time = time.time()
 
     def new_flower():
@@ -84,7 +85,7 @@ def game_loop():
         keys = pygame.key.get_pressed()
         for index, flower in enumerate(flower_list):
             if cow.colliderect(flower) and wilted_list[index] != "happy" and keys[pygame.K_SPACE]:
-                
+
                 wilted_list[index] = "happy"
 
     def mutate():
