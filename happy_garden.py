@@ -84,6 +84,7 @@ def game_loop():
         keys = pygame.key.get_pressed()
         for index, flower in enumerate(flower_list):
             if cow.colliderect(flower) and wilted_list[index] != "happy" and keys[pygame.K_SPACE]:
+                
                 wilted_list[index] = "happy"
 
     def mutate():
