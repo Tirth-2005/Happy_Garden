@@ -20,8 +20,12 @@ def StartInterface(screen, game_images):
 
     actor_1 = game_images['cow']
     actor_2 = game_images['pig']
-    screen.blit(actor_1, (100, 200))
-    screen.blit(actor_2, (400, 200))
+
+    a_1 = pygame.transform.scale(actor_1, (100, 100))
+    a_2 = pygame.transform.scale(actor_2, (80, 100)) 
+
+    screen.blit(a_1, (150, 200))
+    screen.blit(a_2, (550, 200))
     font = pygame.font.Font(None, 50)
     select = font.render("Select a character:", True, (0, 255, 0))
     srect = select.get_rect()
