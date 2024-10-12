@@ -58,8 +58,9 @@ def game_loop():
         actor_water = game_images['cow_water']
         actor_water = pygame.transform.scale(actor_water, (100, 100))
         actor = actor_img.get_rect(topleft=(100, 500))
+    elif actor_selection == 2:
+        actor_img = game_images['pig']
         
-
     # cow_img = game_images['cow']
     # cow = cow_img.get_rect(topleft=(100, 500))
     
