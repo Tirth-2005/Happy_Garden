@@ -52,8 +52,8 @@ def game_loop():
 
     actor_selection, game_over = StartInterface(screen, game_images), False
 
-    cow_img = game_images['cow']
-    cow = cow_img.get_rect(topleft=(100, 500))
+    # cow_img = game_images['cow']
+    # cow = cow_img.get_rect(topleft=(100, 500))
     
     flower_list = []
     wilted_list = []
