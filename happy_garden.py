@@ -63,6 +63,7 @@ def game_loop():
         actor_img = pygame.transform.scale(actor_img, (80, 100))
         actor_water = game_images['pig_water']
         actor_water = pygame.transform.scale(actor_water, (100, 100))
+        actor = actor_img.get_rect(topleft=(100, 500))
         
     # cow_img = game_images['cow']
     # cow = cow_img.get_rect(topleft=(100, 500))
