@@ -54,6 +54,8 @@ def game_loop():
 
     if actor_selection == 1:
         actor_img = game_images['cow']
+        actor_img = pygame.transform.scale(actor_img, (100, 100))
+
         
 
     # cow_img = game_images['cow']
