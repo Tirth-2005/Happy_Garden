@@ -50,7 +50,7 @@ def game_loop():
     screen, game_images = initGame()
     clock = pygame.time.Clock()
 
-    acter, game_over = StartInterface(screen, game_images), False
+    actor_selection, game_over = StartInterface(screen, game_images), False
 
     cow_img = game_images['cow']
     cow = cow_img.get_rect(topleft=(100, 500))
@@ -91,7 +91,7 @@ def game_loop():
     def check_flower_collision():
         keys = pygame.key.get_pressed()
         for index, flower in enumerate(flower_list):
-            if cow.colliderect(flower) and wilted_list[index] != "happy" and keys[pygame.K_SPACE]:
+            if actor.colliderect(flower) and wilted_list[index] != "happy" and keys[pygame.K_SPACE]:
 
                 wilted_list[index] = "happy"
 
@@ -111,7 +111,7 @@ def game_loop():
                 fangflower_vx_list[i] = -fangflower_vx_list[i]
             if fangflower.top < 150 or fangflower.bottom > cfg.SCREENSIZE[1]:
                 fangflower_vy_list[i] = -fangflower_vy_list[i]  
-            if cow.colliderect(fangflower):
+            if actor.colliderect(fangflower):
                 nonlocal game_over
                 game_over = True
 
@@ -136,21 +136,21 @@ def game_loop():
                 mutate()
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT] and cow.left > 0:
-            cow.x -= 5
-        if keys[pygame.K_RIGHT] and cow.right < cfg.SCREENSIZE[0]:
-            cow.x += 5
-        if keys[pygame.K_UP] and cow.top > 150:
-            cow.y -= 5
-        if keys[pygame.K_DOWN] and cow.bottom < cfg.SCREENSIZE[1]:
-            cow.y += 5
+        if (keys[pygame.K_LEFT] or keys[pygame.K_a]) and actor.left > 0:
+            actor.x -= 5
+        if (keys[pygame.K_RIGHT] or keys[pygame.K_d]) and actor.right < cfg.SCREENSIZE[0]:
+            actor.x += 5
+        if (keys[pygame.K_UP] or keys[pygame.K_w]) and actor.top > 150:
+            actor.y -= 5
+        if (keys[pygame.K_DOWN] or keys[pygame.K_s]) and actor.bottom < cfg.SCREENSIZE[1]:
+            actor.y += 5
 
         check_flower_collision()
         update_fangflowers()  
         check_flower_wilted_time()  
 
         screen.blit(game_images['garden'], (0, 0))
-        screen.blit(cow_img, cow.topleft)
+        screen.blit(actor_img, actor.topleft)
 
         for flower in flower_list:
             screen.blit(game_images['flower'] if wilted_list[flower_list.index(flower)] == "happy" else game_images['wilted_flower'], flower.topleft)
