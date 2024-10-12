@@ -52,6 +52,10 @@ def game_loop():
 
     actor_selection, game_over = StartInterface(screen, game_images), False
 
+    if actor_selection == 1:
+        actor_img = game_images['cow']
+        
+
     # cow_img = game_images['cow']
     # cow = cow_img.get_rect(topleft=(100, 500))
     
