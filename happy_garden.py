@@ -139,6 +139,8 @@ def game_loop():
             if actor.colliderect(fangflower_rect):
                 nonlocal game_over
 
+                zap_img = game_images['zap']
+               
 
     flower_timer = pygame.USEREVENT + 1
     wilt_timer = pygame.USEREVENT + 2
