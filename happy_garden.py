@@ -129,7 +129,10 @@ def game_loop():
             fangflower_vx_list.append(randint(2, 3))
             fangflower_vy_list.append(randint(2, 3))
 
-
+    def update_fangflowers():
+        for i, (fangflower_rect, fangflower_img) in enumerate(fangflower_list):
+            fangflower_rect.move_ip(fangflower_vx_list[i], fangflower_vy_list[i])
+            
 
     flower_timer = pygame.USEREVENT + 1
     wilt_timer = pygame.USEREVENT + 2
