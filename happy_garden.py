@@ -140,6 +140,7 @@ def game_loop():
                 nonlocal game_over
 
                 zap_img = game_images['zap']
+                zap_x = actor.left + 10
                
 
     flower_timer = pygame.USEREVENT + 1
