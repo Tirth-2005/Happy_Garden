@@ -132,6 +132,8 @@ def game_loop():
     def update_fangflowers():
         for i, (fangflower_rect, fangflower_img) in enumerate(fangflower_list):
             fangflower_rect.move_ip(fangflower_vx_list[i], fangflower_vy_list[i])
+            if fangflower_rect.left < 0 or fangflower_rect.right > cfg.SCREENSIZE[0]:
+                fangflower_vx_list[i] = -fangflower_vx_list[i]
             
 
     flower_timer = pygame.USEREVENT + 1
