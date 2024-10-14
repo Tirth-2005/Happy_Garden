@@ -1,6 +1,7 @@
 import sys
 import pygame
 from random import randint
+from random import choice
 import time
 import cfg
 
@@ -41,7 +42,7 @@ def StartInterface(screen, game_images):
                 mouse_pos = pygame.mouse.get_pos()
                 if 100 <= mouse_pos[0] <= 300 and 100 <= mouse_pos[1] <= 300:
                     return 1
-                elif 400 <= mouse_pos[0] <= 600 and 100 <= mouse_pos[1] <= 300:
+                elif 400 <= mouse_pos[0] <= 650 and 100 <= mouse_pos[1] <= 300:
                     return 2
         
         pygame.display.update()
@@ -60,11 +61,11 @@ def game_loop():
         actor = actor_img.get_rect(topleft=(100, 500))
     elif actor_selection == 2:
         actor_img = game_images['pig']
-        actor_img = pygame.transform.scale(actor_img, (80, 100))
+        actor_img = pygame.transform.scale(actor_img, (75, 100))
         actor_water = game_images['pig_water']
-        actor_water = pygame.transform.scale(actor_water, (100, 100))
+        actor_water = pygame.transform.scale(actor_water, (85, 100))
         actor = actor_img.get_rect(topleft=(100, 500))
-        
+   
     # cow_img = game_images['cow']
     # cow = cow_img.get_rect(topleft=(100, 500))
     
@@ -91,9 +92,6 @@ def game_loop():
             if wilted_list[rand_flower] == "happy":
                 wilted_list[rand_flower] = time.time()
 
-    # def reset_acter():
-
-
     def check_flower_wilted_time():
         nonlocal game_over
         current_time = time.time()
@@ -105,27 +103,48 @@ def game_loop():
         keys = pygame.key.get_pressed()
         for index, flower in enumerate(flower_list):
             if actor.colliderect(flower) and wilted_list[index] != "happy" and keys[pygame.K_SPACE]:
+                if actor_selection == 2:
+                    water_offset = (-12, 0)
+                else:
+                    water_offset = (-3, 0)
+
+                screen.blit(actor_water, (actor.left + water_offset[0], actor.top + water_offset[1]))
+                pygame.display.flip()
+                time.sleep(0.3)
 
                 wilted_list[index] = "happy"
+                screen.blit(actor_img, actor.topleft)
 
     def mutate():
         if not game_over and flower_list:
             rand_flower = randint(0, len(flower_list) - 1)
             flower_rect = flower_list.pop(rand_flower)
-            fangflower_rect = game_images['fangflower'].get_rect(topleft=flower_rect.topleft)
-            fangflower_list.append(fangflower_rect)
+
+            fangflower = choice(['fang_pink',  'fang_red', 'fang_blue'])
+            fangflower_img = game_images[fangflower]
+            fangflower_img = pygame.transform.scale(fangflower_img, (80, 100))
+            fangflower_rect = fangflower_img.get_rect(topleft=flower_rect.topleft)
+            
+            fangflower_list.append((fangflower_rect, fangflower_img))
             fangflower_vx_list.append(randint(2, 3))
             fangflower_vy_list.append(randint(2, 3))
 
     def update_fangflowers():
-        for i, fangflower in enumerate(fangflower_list):
-            fangflower.move_ip(fangflower_vx_list[i], fangflower_vy_list[i])
-            if fangflower.left < 0 or fangflower.right > cfg.SCREENSIZE[0]:
+        for i, (fangflower_rect, fangflower_img) in enumerate(fangflower_list):
+            fangflower_rect.move_ip(fangflower_vx_list[i], fangflower_vy_list[i])
+            if fangflower_rect.left < 0 or fangflower_rect.right > cfg.SCREENSIZE[0]:
                 fangflower_vx_list[i] = -fangflower_vx_list[i]
-            if fangflower.top < 150 or fangflower.bottom > cfg.SCREENSIZE[1]:
+            if fangflower_rect.top < 150 or fangflower_rect.bottom > cfg.SCREENSIZE[1]:
                 fangflower_vy_list[i] = -fangflower_vy_list[i]  
-            if actor.colliderect(fangflower):
+            if actor.colliderect(fangflower_rect):
                 nonlocal game_over
+
+                zap_img = game_images['zap']
+                zap_x = actor.left + 10
+                zap_y = actor.top - 20  
+                screen.blit(zap_img, (zap_x, zap_y))
+                pygame.display.flip()
+                time.sleep(0.5)
                 game_over = True
 
     flower_timer = pygame.USEREVENT + 1
@@ -133,7 +152,7 @@ def game_loop():
     mutate_timer = pygame.USEREVENT + 3
 
     pygame.time.set_timer(flower_timer, 3000)
-    pygame.time.set_timer(wilt_timer, 3000)
+    pygame.time.set_timer(wilt_timer, 4000)
     pygame.time.set_timer(mutate_timer, 20000)
 
     while not game_over:
@@ -167,8 +186,8 @@ def game_loop():
 
         for flower in flower_list:
             screen.blit(game_images['flower'] if wilted_list[flower_list.index(flower)] == "happy" else game_images['wilted_flower'], flower.topleft)
-        for fangflower in fangflower_list:
-            screen.blit(game_images['fangflower'], fangflower.topleft)
+        for fangflower_rect, fangflower_img in fangflower_list:
+            screen.blit(fangflower_img, fangflower_rect.topleft)
 
         time_elapsed = int(time.time() - start_time)
         font = pygame.font.SysFont(None, 36)
