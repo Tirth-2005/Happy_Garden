@@ -143,6 +143,7 @@ def game_loop():
                 zap_x = actor.left + 10
                 zap_y = actor.top - 20  
                 screen.blit(zap_img, (zap_x, zap_y))
+                pygame.display.flip()
                
 
     flower_timer = pygame.USEREVENT + 1
