@@ -129,23 +129,7 @@ def game_loop():
             fangflower_vx_list.append(randint(2, 3))
             fangflower_vy_list.append(randint(2, 3))
 
-    def update_fangflowers():
-        for i, (fangflower_rect, fangflower_img) in enumerate(fangflower_list):
-            fangflower_rect.move_ip(fangflower_vx_list[i], fangflower_vy_list[i])
-            if fangflower_rect.left < 0 or fangflower_rect.right > cfg.SCREENSIZE[0]:
-                fangflower_vx_list[i] = -fangflower_vx_list[i]
-            if fangflower_rect.top < 150 or fangflower_rect.bottom > cfg.SCREENSIZE[1]:
-                fangflower_vy_list[i] = -fangflower_vy_list[i]  
-            if actor.colliderect(fangflower_rect):
-                nonlocal game_over
 
-                zap_img = game_images['zap']
-                zap_x = actor.left + 10
-                zap_y = actor.top - 20  
-                screen.blit(zap_img, (zap_x, zap_y))
-                pygame.display.flip()
-                time.sleep(0.5)
-                game_over = True
 
     flower_timer = pygame.USEREVENT + 1
     wilt_timer = pygame.USEREVENT + 2
