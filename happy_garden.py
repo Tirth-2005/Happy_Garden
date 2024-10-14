@@ -136,7 +136,9 @@ def game_loop():
                 fangflower_vx_list[i] = -fangflower_vx_list[i]
             if fangflower_rect.top < 150 or fangflower_rect.bottom > cfg.SCREENSIZE[1]:
                 fangflower_vy_list[i] = -fangflower_vy_list[i]  
-            
+            if actor.colliderect(fangflower_rect):
+                nonlocal game_over
+
 
     flower_timer = pygame.USEREVENT + 1
     wilt_timer = pygame.USEREVENT + 2
