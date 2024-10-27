@@ -155,7 +155,17 @@ def game_loop():
     pygame.time.set_timer(wilt_timer, 4000)
     pygame.time.set_timer(mutate_timer, 20000)
 
-    
+    while not game_over:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == flower_timer:
+                add_flowers()
+            elif event.type == wilt_timer:
+                wilt_flower()
+            elif event.type == mutate_timer:
+                mutate()
 
         keys = pygame.key.get_pressed()
         if (keys[pygame.K_LEFT] or keys[pygame.K_a]) and actor.left > 0:
