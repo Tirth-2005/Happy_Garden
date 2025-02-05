@@ -6,4 +6,11 @@
 
 <img src="https://github.com/Tirth-2005/Happy_Garden/blob/master/resources/gif/cow.gif" alt="CowBoy" style="width:48px;height:48px;"/>
 
+<img src="https://github.com/Tirth-2005/Happy_Garden/blob/master/resources/images/s1.png" />
+
+
+
+
+<img src="https://github.com/Tirth-2005/Happy_Garden/blob/master/resources/images/s2.png" />
+
 
